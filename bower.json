@@ -1,0 +1,20 @@
+{
+  "name": "js-maps-starter-project",
+  "homepage": "https://github.com/guenter82/js-maps-starter-project",
+  "authors": [
+    "guenter82 <guenter.oeller@gmail.com>"
+  ],
+  "description": "Start a JavaScript Google Maps project",
+  "main": "index.html",
+  "keywords": [
+    "google-maps"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

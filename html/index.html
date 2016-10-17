@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="de" ng-app="myApplicationModule">
+  <head>
+    <meta charset="utf-8">
+    <title>My Project Title</title>
+    <script src='bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>
+    <link rel="stylesheet" href="styles/mystyles.css"/>
+  </head>
+  <body>
+    <div id="page-wrapper" ng-controller="mapController" ng-init="getLocation()">
+      <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+    </div>
+  </body>
+</html>
