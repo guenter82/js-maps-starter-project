@@ -2,10 +2,10 @@
 
 /* App Module */
 var myApplicationModule = myApplicationModule || angular.module('myApplicationModule', [
-      'uiGmapgoogle-maps',
-      'myControllers'
-  ]
-);
+    'uiGmapgoogle-maps',
+    'geolocation',
+    'myControllers'
+]);
 
 myApplicationModule.config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({

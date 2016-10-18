@@ -1,14 +1,28 @@
 <!doctype html>
 <html lang="de" ng-app="myApplicationModule">
-  <head>
-    <meta charset="utf-8">
-    <title>My Project Title</title>
-    <script src='bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>
-    <link rel="stylesheet" href="styles/mystyles.css"/>
-  </head>
-  <body>
-    <div id="page-wrapper" ng-controller="mapController" ng-init="getLocation()">
-      <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
-    </div>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <title>My Project Title</title>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/lodash/dist/lodash.min.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src='bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
+        <script src='bower_components/angularjs-geolocation/dist/angularjs-geolocation.min.js'></script>
+        <script src='bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>
+
+        <script src="js/app.js"></script>
+        <script src="js/controllers.js"></script>
+
+        <link rel="stylesheet" href="styles/mystyles.css"/>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    </head>
+    <body>
+        <h1>Mein Projekt Titel</h1>
+        <h2>Mein Menü</h2>
+        <div id="page-wrapper" ng-controller="mapController" ng-init="getLocation()">
+            <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+        </div>
+    </body>
 </html>
