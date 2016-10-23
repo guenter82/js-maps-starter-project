@@ -3,33 +3,54 @@
     <head>
         <meta charset="utf-8">
         <title>My Project Title</title>
-        <link href="/image/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+        <link href="image/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
 
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script>
+            document.write('<base href="' + document.location + '" />');
+        </script>
+
         <script src="bower_components/lodash/dist/lodash.min.js"></script>
         <script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <script src='bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
         <script src='bower_components/angularjs-geolocation/dist/angularjs-geolocation.min.js'></script>
         <script src='bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>
 
         <script src="js/app.js"></script>
         <script src="js/controllers.js"></script>
 
-        <link rel="stylesheet" href="styles/mystyles.css"/>
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="styles/mystyles.css"/>
+
     </head>
     <body>
         <h1>Mein Projekt Titel</h1>
-        <h2>Mein Menü</h2>
-        <div id="page-wrapper" ng-controller="mapController" ng-init="getLocation()">
-            <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true">
-              <ui-gmap-window coords="map.window.marker.coords" options="map.window.options" closeClick="map.window.closeClick()" templateUrl="'template/marker.html'" templateParameter="map.window"></ui-gmap-window>
-              <ui-gmap-markers idKey="'id'" models="markers" coords="'coords'" events="map.markersEvents"></ui-gmap-markers>
-              <!-- Warning Message Window -->
-              <ui-gmap-window coords="map.center" show="false" closeClick="map.window.closeClick()" templateUrl="'template/mapwarning.html'" templateParameter="mapwarning"></ui-gmap-window>
-            </ui-gmap-google-map>
+        <div class="navbar" ng-controller="navController">
+            <ul class="nav navbar-nav">
+                <li ng-class="navClass('home')">
+                    <a href='' ng-click="loadHome()">Home</a>
+                </li>
+                <li ng-class="navClass('classhome')">
+                    <a href='http://diekheva.at'>Über uns</a>
+                </li>
+                <li ng-class="navClass('schoolhome')">
+                    <a href='http://khev.at'>Schulhompage</a>
+                </li>
+                <li ng-class="navClass('contact')">
+                    <a href='' ng-click="loadContact()">Kontakt</a>
+                </li>
+            </ul>
         </div>
+        <div ng-controller="alertController" ng-init="getLocation()">
+            <h5>Systemnachrichten</h5>
+            <script type="text/ng-template" id="alert.html">
+                <div ng-transclude></div>
+            </script>
+            <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+        </div>
+
+        <div ng-view></div> <!-- Hier kommt der Inhalt -->
     </body>
 </html>

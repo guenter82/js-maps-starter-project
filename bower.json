@@ -16,5 +16,11 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angular-google-maps": "^2.4.0",
+    "angularjs-geolocation": "^0.1.1",
+    "angular-bootstrap": "^2.2.0",
+    "angular-route": "^1.5.8"
+  }
 }
