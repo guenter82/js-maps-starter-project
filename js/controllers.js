@@ -35,7 +35,8 @@ myControllers.controller("mapController", ['$scope', 'uiGmapGoogleMapApi', 'geol
     $scope.map = {
         zoom: 12,
         options: {
-            streetViewControl: false
+            streetViewControl: false,
+            scrollwheel: false
         },
         clustererOptions: {
             imagePath: 'https://github.com/googlemaps/js-marker-clusterer/raw/gh-pages/images/m'
@@ -73,6 +74,10 @@ myControllers.controller("mapController", ['$scope', 'uiGmapGoogleMapApi', 'geol
             parent: $scope
         }
     };
+    var imageIconGreen = {
+      url: 'image/icon_green.png'
+    };
+
     $scope.getLocation = function() {
         var pos = {
             latitude: 48.3,
@@ -83,6 +88,16 @@ myControllers.controller("mapController", ['$scope', 'uiGmapGoogleMapApi', 'geol
             navigator.geolocation.getCurrentPosition(function(position) {
                 pos.latitude = position.coords.latitude;
                 pos.longitude = position.coords.longitude;
+                var myMarker = {
+                    id: $scope.markers.length+1,
+                    station: 'My Position',
+                    coords: {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    },
+                    icon: imageIconGreen
+                };
+                $scope.markers.push(myMarker);
                 var alert = {
                     type: 'success',
                     msg: 'Your position: ' + position.coords.latitude + ', ' + position.coords.longitude
