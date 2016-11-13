@@ -25,35 +25,47 @@
 
     </head>
     <body>
-        <h1>Mein Projekt Titel</h1>
-        <!-- Navigation bar -->
-        <div class="navbar" ng-controller="navController">
-            <ul class="nav navbar-nav">
-                <li ng-class="navClass('home')">
-                    <a href='' ng-click="loadHome()">Home</a>
-                </li>
-                <li ng-class="navClass('classhome')">
-                    <a href='http://diekheva.at'>Über uns</a>
-                </li>
-                <li ng-class="navClass('schoolhome')">
-                    <a href='http://khev.at'>Schulhompage</a>
-                </li>
-                <li ng-class="navClass('contact')">
-                    <a href='' ng-click="loadContact()">Kontakt</a>
-                </li>
-            </ul>
-        </div>
+        <div id="header">
+          <h1>Mein Projekt Titel</h1>
+          <!-- Navigation bar -->
+          <div class="navbar" ng-controller="navController">
+              <ul class="nav navbar-nav">
+                  <li ng-class="navClass('home')">
+                      <a href='' ng-click="loadHome()">Home</a>
+                  </li>
+                  <li ng-class="navClass('classhome')">
+                      <a href='http://diekheva.at'>Über uns</a>
+                  </li>
+                  <li ng-class="navClass('schoolhome')">
+                      <a href='http://khev.at'>Schulhompage</a>
+                  </li>
+                  <li ng-class="navClass('contact')">
+                      <a href='' ng-click="loadContact()">Kontakt</a>
+                  </li>
+              </ul>
+          </div>
 
-        <!-- Message area -->
-        <div ng-controller="alertController" ng-init="getLocation()">
-            <h5>Systemnachrichten</h5>
-            <script type="text/ng-template" id="alert.html">
-                <div ng-transclude></div>
-            </script>
-            <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
-        </div>
+          <!-- Message area -->
+          <div id="alertarea" ng-controller="alertController">
+              <h5>Systemnachrichten</h5>
+              <div id="alerts">
+                <script type="text/ng-template" id="alert.html">
+                    <div ng-transclude></div>
+                </script>
+                <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">
+                  {{alert.msg}}
+                </div>
+              </div>
+          </div>
+      </div>
 
-        <!-- content area. Starting with Map -->
+      <!-- content area. Starting with Map -->
+      <div id="content">
         <div ng-view></div> <!-- Hier kommt der Inhalt -->
+      </div>
+
+      <!-- possible footer -->
+      <div id="footer">
+      </div>
     </body>
 </html>
