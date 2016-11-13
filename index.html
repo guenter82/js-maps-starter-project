@@ -26,6 +26,7 @@
     </head>
     <body>
         <h1>Mein Projekt Titel</h1>
+        <!-- Navigation bar -->
         <div class="navbar" ng-controller="navController">
             <ul class="nav navbar-nav">
                 <li ng-class="navClass('home')">
@@ -42,6 +43,8 @@
                 </li>
             </ul>
         </div>
+
+        <!-- Message area -->
         <div ng-controller="alertController" ng-init="getLocation()">
             <h5>Systemnachrichten</h5>
             <script type="text/ng-template" id="alert.html">
@@ -50,6 +53,7 @@
             <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
         </div>
 
+        <!-- content area. Starting with Map -->
         <div ng-view></div> <!-- Hier kommt der Inhalt -->
     </body>
 </html>
