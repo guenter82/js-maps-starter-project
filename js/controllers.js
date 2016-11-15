@@ -1,7 +1,6 @@
 'use strict';
 
 /* Controllers */
-
 var myControllers = angular.module('myControllers', []);
 
 myControllers.controller("alertController", ['$rootScope', '$scope', function($rootScope, $scope) {
@@ -27,13 +26,15 @@ myControllers.controller("navController", ['$scope', '$location', function($scop
 
 }]);
 
-myControllers.controller("mapController", ['$scope', 'uiGmapGoogleMapApi', 'geolocation', '$q', function($scope, uiGmapGoogleMapApi, geolocation, $q) {
+
+myControllers.controller("mapController", ['$scope', 'uiGmapGoogleMapApi', 'geolocation', '$q' , 'PegelAlarmService',
+  function($scope, uiGmapGoogleMapApi, geolocation, $q, PegelAlarmService) {
     $scope.doSomethingWithMarker = function(markerWindow) {
         console.log("Marker - Window: " + markerWindow);
         markerWindow.doSomethingWithMarker();
     };
     $scope.map = {
-        zoom: 12,
+        zoom: 8,
         options: {
             streetViewControl: false,
             scrollwheel: false
@@ -60,6 +61,7 @@ myControllers.controller("mapController", ['$scope', 'uiGmapGoogleMapApi', 'geol
             },
             doSomethingWithMarker: function() {
                 //do something
+                console.log("doSomethingWithMarker");
                 console.log("Marker: " + this.marker.station);
                 this.closeClick();
             },
@@ -84,63 +86,31 @@ myControllers.controller("mapController", ['$scope', 'uiGmapGoogleMapApi', 'geol
             longitude: 14.3
         };
         $scope.map.center = pos;
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                pos.latitude = position.coords.latitude;
-                pos.longitude = position.coords.longitude;
-                var myMarker = {
-                    id: $scope.markers.length+1,
-                    station: 'My Position',
-                    coords: {
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude
-                    },
-                    icon: imageIconGreen
-                };
-                $scope.markers.push(myMarker);
-                var alert = {
-                    type: 'success',
-                    msg: 'Your position: ' + position.coords.latitude + ', ' + position.coords.longitude
-                };
-                console.log(alert.msg);
-                $scope.alerts.push(alert);
-            }, function() {
-                var alert = {
-                    type: 'danger',
-                    msg: 'Geolocation Service failed, because\nbrowser location function return error.'
-                };
-                console.log(alert.msg);
-                $scope.alerts.push(alert);
-            });
-        } else {
-            var alert = {
-                type: 'danger',
-                msg: 'Geolocation Service failed, because\nyour browser doesn\'t support geolocation.'
-            };
-            console.log(alert.msg);
-            $scope.alerts.push(alert);
-        }
     };
 
-    var marker1 = {
-        id: 1,
-        station: 'First Marker',
-        coords: {
-            latitude: 48.3,
-            longitude: 14.25
-        }
-    };
-    var marker2 = {
-        id: 2,
-        station: 'Second Marker',
-        coords: {
-            latitude: 48.3,
-            longitude: 14.2
-        }
-    };
-    $scope.markers = [marker1, marker2];
-    
 
+    var handleWaterLevels = function(response) {
+      if (DEBUG) console.log("handleWaterLevels: " + response.data);
+      var stations = response.data.payload.stations;
+      for (var i=0; i<stations.length; i++) {
+        var s = stations[i];
+        var m = {
+          id: i+1,
+          station: s.stationName,
+          coords: {
+            latitude: s.latitude,
+            longitude: s.longitude
+          },
+          data: s
+        }
+        $scope.markers.push(m);
+      }
+      if (DEBUG) console.log("New Markers: " + $scope.markers.length);
+    //  $scope.$apply();
+    };
+
+    $scope.markers = [];
+    PegelAlarmService.getWaterLevels(handleWaterLevels);
     uiGmapGoogleMapApi.then(function(maps) {
         //TODO when map with markers is loaded
     });

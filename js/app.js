@@ -1,4 +1,5 @@
 'use strict';
+var DEBUG = true;
 
 /* App Module */
 var myApplicationModule = myApplicationModule || angular.module('myApplicationModule', [
@@ -6,6 +7,7 @@ var myApplicationModule = myApplicationModule || angular.module('myApplicationMo
     'geolocation',
     'ngRoute',
     'ui.bootstrap',
+    'PegelAlarm',
     'myControllers'
 ]);
 

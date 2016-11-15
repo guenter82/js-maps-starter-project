@@ -1,5 +1,9 @@
 <div class="no-padding">
-    <h3>Hier könnt ihr die Detail-Seite anzeigen für den Marker</h3>
+    <h5>Hier könnt ihr die Detail-Seite anzeigen für den Marker</h5>
+    <p>Stationsname: {{parameter.marker.data.name}}</p>
+    <p>Wasserhöhe: {{parameter.marker.data.data[0].value}} cm</p>
+    <p><a href="{{parameter.marker.data.stationDetailUrl}}" target="_blank">Detail-Seite</a></p>
+    <!-- paramter .... markerWindow -->
     <!-- Requires complex function call where "parameter.parent" is $scope otherwise parameter.marker is always "undefined" -->
     <button ng-click="parameter.parent.doSomethingWithMarker(parameter)">Do Something</button>
 
