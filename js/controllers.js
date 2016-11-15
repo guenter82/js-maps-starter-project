@@ -139,6 +139,7 @@ myControllers.controller("mapController", ['$scope', 'uiGmapGoogleMapApi', 'geol
         }
     };
     $scope.markers = [marker1, marker2];
+    
 
     uiGmapGoogleMapApi.then(function(maps) {
         //TODO when map with markers is loaded
