@@ -1,4 +1,5 @@
 'use strict';
+var DEBUG = true;
 
 /* App Module */
 var myApplicationModule = myApplicationModule || angular.module('myApplicationModule', [
@@ -6,6 +7,7 @@ var myApplicationModule = myApplicationModule || angular.module('myApplicationMo
     'geolocation',
     'ngRoute',
     'ui.bootstrap',
+    'PegelAlarm',
     'myControllers'
 ]);
 
@@ -31,3 +33,14 @@ myApplicationModule.config(function(uiGmapGoogleMapApiProvider) {
         libraries: 'weather,geometry,visualization'
     });
 });
+
+// myApplicationModule.directive('contentfill', function ($window) {
+//     return {
+//         restrict: 'A',
+//         link: function (scope, elem, attrs) {
+//             var winHeight = $window.innerHeight;
+//             var otherElements = 170 + 30;
+//             elem.css('height', winHeight - otherElements + 'px');
+//         }
+//     };
+// });

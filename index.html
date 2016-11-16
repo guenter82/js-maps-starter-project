@@ -2,7 +2,7 @@
 <html lang="de" ng-app="myApplicationModule">
     <head>
         <meta charset="utf-8">
-        <title>My Project Title</title>
+        <title>My Project Title MASTER</title>
         <link href="image/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
 
         <script>
@@ -10,7 +10,7 @@
         </script>
 
         <script src="bower_components/lodash/dist/lodash.min.js"></script>
-        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <script src='bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
         <script src="bower_components/angular-route/angular-route.min.js"></script>
@@ -19,38 +19,54 @@
 
         <script src="js/app.js"></script>
         <script src="js/controllers.js"></script>
+        <script src="js/data/pegelalarm.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
-        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="styles/mystyles.css"/>
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap/bootstrap.min.css"/>
 
     </head>
     <body>
-        <h1>Mein Projekt Titel</h1>
-        <div class="navbar" ng-controller="navController">
-            <ul class="nav navbar-nav">
-                <li ng-class="navClass('home')">
-                    <a href='' ng-click="loadHome()">Home</a>
-                </li>
-                <li ng-class="navClass('classhome')">
-                    <a href='http://diekheva.at'>Über uns</a>
-                </li>
-                <li ng-class="navClass('schoolhome')">
-                    <a href='http://khev.at'>Schulhompage</a>
-                </li>
-                <li ng-class="navClass('contact')">
-                    <a href='' ng-click="loadContact()">Kontakt</a>
-                </li>
-            </ul>
-        </div>
-        <div ng-controller="alertController" ng-init="getLocation()">
-            <h5>Systemnachrichten</h5>
-            <script type="text/ng-template" id="alert.html">
-                <div ng-transclude></div>
-            </script>
-            <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
-        </div>
+        <div id="header">
+          <h1>Mein Projekt Titel</h1>
+          <!-- Navigation bar -->
+          <div class="navbar" ng-controller="navController">
+              <ul class="nav navbar-nav">
+                  <li ng-class="navClass('home')">
+                      <a href='' ng-click="loadHome()">Home</a>
+                  </li>
+                  <li ng-class="navClass('classhome')">
+                      <a href='http://diekheva.at'>Über uns</a>
+                  </li>
+                  <li ng-class="navClass('schoolhome')">
+                      <a href='http://khev.at'>Schulhompage</a>
+                  </li>
+                  <li ng-class="navClass('contact')">
+                      <a href='' ng-click="loadContact()">Kontakt</a>
+                  </li>
+              </ul>
+          </div>
 
+          <!-- Message area -->
+          <div id="alertarea" ng-controller="alertController">
+              <h5>Systemnachrichten</h5>
+              <div id="alerts">
+                <script type="text/ng-template" id="alert.html">
+                    <div ng-transclude></div>
+                </script>
+                <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">
+                  {{alert.msg}}
+                </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- content area. Starting with Map -->
+      <div id="content">
         <div ng-view></div> <!-- Hier kommt der Inhalt -->
+      </div>
+
+      <!-- possible footer -->
+      <div id="footer">
+      </div>
     </body>
 </html>

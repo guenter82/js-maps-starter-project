@@ -2,8 +2,7 @@
     <div id="map-wrapper">
         <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true">
             <ui-gmap-window coords="map.window.marker.coords" options="map.window.options" closeClick="map.window.closeClick()" templateUrl="'template/marker.html'" templateParameter="map.window"></ui-gmap-window>
-            <ui-gmap-markers idKey="'id'" models="markers" coords="'coords'" events="map.markersEvents"></ui-gmap-markers>
-            <!-- Warning Message Window -->
+            <ui-gmap-markers idKey="'id'" models="markers" coords="'coords'" events="map.markersEvents" icon='icon'></ui-gmap-markers>
             <ui-gmap-window coords="map.center" show="false" closeClick="map.window.closeClick()" templateUrl="'template/mapwarning.html'" templateParameter="mapwarning"></ui-gmap-window>
         </ui-gmap-google-map>
     </div>
